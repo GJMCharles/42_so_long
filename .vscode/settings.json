@@ -6,6 +6,8 @@
 		"ft_printf.h": "c",
 		"libft.h": "c",
 		"limits.h": "c",
-		"so_long.h": "c"
+		"so_long.h": "c",
+		"stdarg.h": "c",
+		"stddef.h": "c"
 	}
 }

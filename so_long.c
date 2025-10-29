@@ -16,6 +16,10 @@ int	main(int argc, char *argv[])
 {
 	(void) argc;
 	(void) argv;
-	//
+	/*
+	READ FILE => GET CONTENT
+	VALIDATE CONTENT => AS MAP
+	
+	 */
 	return (EXIT_SUCCESS);
 }

@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: grcharle <grcharle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/29 03:06:47 by grcharle          #+#    #+#             */
-/*   Updated: 2025/10/29 03:06:50 by grcharle         ###   ########.fr       */
+/*   Created: 2025/07/31 17:27:12 by grcharle          #+#    #+#             */
+/*   Updated: 2025/07/31 17:27:14 by grcharle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-# include "ft_printf.h"
-# include "get_next_line.h"
-# include "mlx.h"
+# include <unistd.h>
+# include <stdlib.h>
 
-typedef struct s_game
-{
-	/* data */
-}	t_game;
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 
-typedef struct s_enemy
-{
-	/* data */
-}	t_enemy;
+char	*get_next_line(int fd);
+size_t	ft_strlen(const char *str);
+char	*ft_strdup(const char *s);
+char	*ft_strchr(const char *s, char c);
+char	*ft_strjoin(char *s1, char *s2);
 
-typedef struct s_player
-{
-	/* data */
-}	t_player;
-
-#endif // SO_LONG_H
+#endif

@@ -20,21 +20,24 @@ CFLAGS := -Wall -Wextra -Werror
 MAKEFLAGS := --no-print-directory
 
 LIBFT_SRC := ./libft
+GETNEXTLINE_SRC := ./getnextline
 FTPRINTF_SRC := ./ftprintf
 MINILIBX_SRC := ./minilibx
 
 LDFLAGS := \
 	-I ./ \
-	-I $(MINILIBX_SRC) \
+	-I $(LIBFT_SRC) \
+	-I $(GETNEXTLINE_SRC) \
 	-I $(FTPRINTF_SRC) \
-	-I $(LIBFT_SRC)
+	-I $(MINILIBX_SRC) \
 
 LDLIBS := \
 	-lXext -lX11 -lm -lz \
 	-L$(FTPRINTF_SRC) -lftprintf \
 	-L$(LIBFT_SRC) -lft
 
-SOURCES := so_long.c
+SOURCES := so_long.c \
+
 
 OBJECTS := $(patsubst %.c,%.o,$(SOURCES))
 
