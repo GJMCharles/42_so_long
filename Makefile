@@ -30,7 +30,7 @@ LDFLAGS := \
 	-I $(LIBFT_SRC)
 
 LDLIBS := \
-	-lXext -lX11 \
+	-lXext -lX11 -lm -lz \
 	-L$(FTPRINTF_SRC) -lftprintf \
 	-L$(LIBFT_SRC) -lft
 
@@ -46,19 +46,19 @@ all: LIBS $(NAME)
 	$(CC) $(CFLAGS) $(LDFLAGS) -c $< -o $@
 
 LIBS:
-	@make -C $(MINILIBX_SRC) all
-	@make -C $(FTPRINTF_SRC) all
-	@make -C $(LIBFT_SRC) all
+	@make $(MAKEFLAGS) -C $(MINILIBX_SRC) all
+	@make $(MAKEFLAGS) -C $(FTPRINTF_SRC) all
+	@make $(MAKEFLAGS) -C $(LIBFT_SRC) all
 
 clean:
-	@make -C $(MINILIBX_SRC) clean
-	@make -C $(FTPRINTF_SRC) clean
-	@make -C $(LIBFT_SRC) clean
+	@make $(MAKEFLAGS) -C $(MINILIBX_SRC) clean
+	@make $(MAKEFLAGS) -C $(FTPRINTF_SRC) clean
+	@make $(MAKEFLAGS) -C $(LIBFT_SRC) clean
 	@$(RM) $(OBJECTS)
 
 fclean: clean
-	@make -C $(FTPRINTF_SRC) fclean
-	@make -C $(LIBFT_SRC) fclean
+	@make $(MAKEFLAGS) -C $(FTPRINTF_SRC) fclean
+	@make $(MAKEFLAGS) -C $(LIBFT_SRC) fclean
 	@$(RM) $(NAME)
 
 re: fclean all
