@@ -46,10 +46,12 @@ all: LIBS $(NAME)
 	$(CC) $(CFLAGS) $(LDFLAGS) -c $< -o $@
 
 LIBS:
+	@make -C $(MINILIBX_SRC) all
 	@make -C $(FTPRINTF_SRC) all
 	@make -C $(LIBFT_SRC) all
-		
+
 clean:
+	@make -C $(MINILIBX_SRC) clean
 	@make -C $(FTPRINTF_SRC) clean
 	@make -C $(LIBFT_SRC) clean
 	@$(RM) $(OBJECTS)

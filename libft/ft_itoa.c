@@ -32,7 +32,7 @@ static char	*fill_pointer(char *ptr, size_t len, int n)
 	size_t	i;
 
 	i = 0;
-	if (n == -2147483648)
+	if (n == INT_MIN)
 	{
 		ptr[i++] = '-';
 		ptr[i++] = '2';

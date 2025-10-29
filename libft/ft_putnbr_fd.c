@@ -38,7 +38,7 @@ void	ft_putnbr_fd(int n, int fd)
 	int		size;
 	char	nb[11];
 
-	if (n == -2147483648)
+	if (n == INT_MIN)
 	{
 		ft_strlcpy(nb, "-2147483648", 12);
 		ft_putstr_fd(nb, fd);

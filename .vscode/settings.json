@@ -1,5 +1,11 @@
 {
 	"workbench.colorCustomizations": {
 		"editorRuler.foreground": "#ff4081"
+	},
+	"files.associations": {
+		"ft_printf.h": "c",
+		"libft.h": "c",
+		"limits.h": "c",
+		"so_long.h": "c"
 	}
 }
