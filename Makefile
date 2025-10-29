@@ -19,29 +19,35 @@ CC := cc
 CFLAGS := -Wall -Wextra -Werror
 MAKEFLAGS := --no-print-directory
 
-LIBFT_SRC := ./libft
-GETNEXTLINE_SRC := ./getnextline
-FTPRINTF_SRC := ./ftprintf
-MINILIBX_SRC := ./minilibx
+LIB_DIR	:=	libraries/
+SRC_DIR	:=	src/
+
+LIBFT_SRC := ./$(LIB_DIR)libft
+GETNEXTLINE_SRC := ./$(LIB_DIR)getnextline
+FTPRINTF_SRC := ./$(LIB_DIR)ftprintf
+MINILIBX_SRC := ./$(LIB_DIR)minilibx
 
 LDFLAGS := \
 	-I ./ \
 	-I $(LIBFT_SRC) \
-	-I $(GETNEXTLINE_SRC) \
 	-I $(FTPRINTF_SRC) \
 	-I $(MINILIBX_SRC) \
+	-I $(GETNEXTLINE_SRC)
 
 LDLIBS := \
 	-lXext -lX11 -lm -lz \
-	-L$(FTPRINTF_SRC) -lftprintf \
-	-L$(LIBFT_SRC) -lft
+	-L $(LIBFT_SRC) -lft \
+	-L $(FTPRINTF_SRC) -lftprintf \
+	-L $(MINILIBX_SRC) -lmlx_Linux
 
-SOURCES := so_long.c \
-
+SOURCES := ./$(SRC_DIR)main.c \
+	./$(SRC_DIR)error.c \
+	./$(SRC_DIR)extract_map.c
 
 OBJECTS := $(patsubst %.c,%.o,$(SOURCES))
 
 $(NAME): $(OBJECTS)
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
 all: LIBS $(NAME)
 

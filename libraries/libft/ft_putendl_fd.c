@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: grcharle <grcharle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/29 03:06:52 by grcharle          #+#    #+#             */
-/*   Updated: 2025/10/29 03:07:37 by grcharle         ###   ########.fr       */
+/*   Created: 2025/05/02 02:57:25 by grcharle          #+#    #+#             */
+/*   Updated: 2025/05/15 11:46:03 by grcharle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "libft.h"
 
-int	main(int argc, char *argv[])
+void	ft_putendl_fd(char *s, int fd)
 {
-	(void) argc;
-	(void) argv;
-	/*
-	READ FILE => GET CONTENT
-	VALIDATE CONTENT => AS MAP
-	
-	 */
-	return (EXIT_SUCCESS);
+	if (!s)
+		return ;
+	ft_putstr_fd(s, fd);
+	ft_putchar_fd('\n', fd);
+	return ;
 }

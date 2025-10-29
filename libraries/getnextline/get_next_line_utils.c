@@ -61,11 +61,11 @@ char	*ft_strjoin(char *s1, char *s2)
 	int		j;
 
 	if (!s1 || !s2)
-		return (free(s1), s1 = 0, (void *)0);
+		return ((char *)(free(s1), s1 = 0, (void *)0));
 	i = 0;
 	res = (char *) malloc(sizeof(char) * ((ft_strlen(s1) + ft_strlen(s2)) + 1));
 	if (!res)
-		return (free(s1), s1 = 0, (void *)0);
+		return ((char *)(free(s1), s1 = 0, (void *)0));
 	while (s1[i] != 0)
 	{
 		res[i] = s1[i];

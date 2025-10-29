@@ -4,6 +4,7 @@
             "name": "Linux",
             "includePath": [
                 "${default}",
+                "${workspaceFolder}",
                 "${workspaceFolder}/ftprintf",
                 "${workspaceFolder}/libft",
                 "${workspaceFolder}/minilibx",

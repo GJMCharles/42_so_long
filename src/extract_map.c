@@ -1,20 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   extract_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: grcharle <grcharle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/02 02:57:25 by grcharle          #+#    #+#             */
-/*   Updated: 2025/05/15 11:46:03 by grcharle         ###   ########.fr       */
+/*   Created: 2025/10/29 13:54:56 by grcharle          #+#    #+#             */
+/*   Updated: 2025/10/29 13:55:04 by grcharle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "so_long.h"
 
-void	ft_putendl_fd(char *s, int fd)
+char	*extract_map(const char *file_path)
 {
-	ft_putstr_fd(s, fd);
-	ft_putchar_fd('\n', fd);
-	return ;
+	int	test;
+	int	fd;
+
+	test = ft_strncmp(\
+		".br", \
+		ft_substr(file_path, ft_strlen(file_path) - 3, 3), \
+		3);
+	if (test != 0)
+		return ((char *)((void *)0));
+	fd = open(file_path, O_RDONLY);
+	close(fd);
+	return ((char *)((void *)0));
 }
