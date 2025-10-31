@@ -12,13 +12,20 @@
 
 #include "so_long.h"
 
-int	close_win(t_Game *game)
+void	error_message(char *message)
+{
+	ft_putendl_fd("Error", 2);
+	if (message)
+		ft_putendl_fd(message, 2);
+}
+
+int	close_win(t_game *game)
 {
 	mlx_loop_end(game->d.mlx);
 	return (0);
 }
 
-int	key_hook(int keycode, t_Game *game)
+int	key_hook(int keycode, t_game *game)
 {
 	if (keycode == 65307)
 		mlx_loop_end(game->d.mlx);
@@ -37,27 +44,29 @@ int	key_hook(int keycode, t_Game *game)
 int	main(int argc, char **argv)
 {
 	int			fd;
-	t_Game		*g;
+	t_game		*game;
 
-	g = NULL;
+	(void) fd;
+	game = ((t_game *)(void *)0);
 	if (argc != 2)
-		return (ft_putstr_fd ("Error\nNo map specified", 2), 0);
+		return (error_message("No map specified"), 0);
 	if (verif_ext(argv[1]))
-		return (ft_putstr_fd("Error\nNot a .ber file", 2), 0);
+		return (error_message("Not a .ber file"), 0);
 	fd = open(argv[1], O_RDONLY);
-	g = init_struct(fd);
-	g->d.mlx = mlx_init();
-	if (!g->d.mlx)
-		return (free_game(g), 0);
-	g->d.mlx_win = mlx_new_window(g->d.mlx, g->d.win.w, g->d.win.h, "SO_LONG");
-	init_texture(g);
-	render_map(g);
-	mlx_hook(g->d.mlx_win, 17, 0, close_win, g);
-	mlx_key_hook(g->d.mlx_win, key_hook, g);
-	mlx_loop(g->d.mlx);
-	mlx_destroy_window(g->d.mlx, g->d.mlx_win);
-	if (g->player->w == 1)
+	game = init_struct(fd);
+	close(fd);
+	game->d.mlx = mlx_init();
+	if (!game->d.mlx)
+		return (free_game(game), 0);
+	game->d.mlx_win = mlx_new_window(game->d.mlx, game->d.win.w, game->d.win.h, "SO_LONG");
+	init_texture(game);
+	render_map(game);
+	mlx_hook(game->d.mlx_win, 17, 0, close_win, game);
+	mlx_key_hook(game->d.mlx_win, key_hook, game);
+	mlx_loop(game->d.mlx);
+	mlx_destroy_window(game->d.mlx, game->d.mlx_win);
+	if (game->player->w == 1)
 		ft_printf("YOU WIN\n");
-	free_game_2(g);
+	free_game_2(game);
 	return (0);
 }

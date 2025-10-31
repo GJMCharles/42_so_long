@@ -17,7 +17,7 @@ static void	bis(void *mlx, void *win, void *img, t_nk nk)
 	mlx_put_image_to_window(mlx, win, img, nk.j * 64, nk.i * 64);
 }
 
-void	render_map(t_Game *game)
+void	render_map(t_game *game)
 {
 	t_nk	nk;
 

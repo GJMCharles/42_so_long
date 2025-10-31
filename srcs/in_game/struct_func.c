@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-int	nbr_collectible(t_Game *game)
+int	nbr_collectible(t_game *game)
 {
 	int	i;
 
@@ -37,7 +37,7 @@ int	valid_nbr_player(char **map)
 	cpt_player = 0;
 	if (!map)
 	{
-		ft_putstr_fd("Error\nParsing failed", 2);
+		error_message("Parsing failed");
 		return (1);
 	}
 	while (map[i])
@@ -49,7 +49,7 @@ int	valid_nbr_player(char **map)
 		i++;
 	}
 	if (cpt_player != 1)
-		return (ft_putstr_fd("Error\nMore or less than 1 player", 2), 1);
+		return (error_message("More or less than 1 player"), 1);
 	return (0);
 }
 
@@ -64,7 +64,7 @@ int	valid_nbr_exit(char **map)
 	cpt_sortie = 0;
 	if (!map)
 	{
-		ft_putstr_fd("Error\nParsing failed", 2);
+		error_message("Parsing failed");
 		return (1);
 	}
 	while (map[i])
@@ -76,7 +76,7 @@ int	valid_nbr_exit(char **map)
 		i++;
 	}
 	if (cpt_sortie != 1)
-		return (ft_putstr_fd("Error\nThere is more or less than 1 exit", 2), 1);
+		return (error_message("There is more or less than 1 exit"), 1);
 	return (0);
 }
 
@@ -91,7 +91,7 @@ int	valid_nbr_collectibles(char **map)
 	cpt_collectibles = 0;
 	if (!map)
 	{
-		ft_putstr_fd("Error\nParsing failed", 2);
+		error_message("Parsing failed");
 		return (1);
 	}
 	while (map[i])

@@ -28,7 +28,7 @@ void	free_map(char **map)
 	free(map);
 }
 
-void	free_game(t_Game *game)
+void	free_game(t_game *game)
 {
 	int	i;
 
@@ -49,7 +49,7 @@ void	free_game(t_Game *game)
 	exit (0);
 }
 
-void	free_game_2(t_Game *game)
+void	free_game_2(t_game *game)
 {
 	int	i;
 

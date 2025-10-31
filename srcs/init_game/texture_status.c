@@ -17,14 +17,14 @@ static void	*bis(void *ptr, char *p, int *w, int *h)
 	return (mlx_xpm_file_to_image(ptr, p, w, h));
 }
 
-void	init_texture(t_Game *game)
+void	init_texture(t_game *game)
 {
 	int	h;
 	int	w;
 
 	h = 64;
 	w = 64;
-	game->t = malloc(sizeof(t_Texture));
+	game->t = malloc(sizeof(t_texture));
 	if (!game->t)
 	{
 		free_game(game);
@@ -40,7 +40,7 @@ void	init_texture(t_Game *game)
 	game->t->h = 64;
 }
 
-void	clear_image(t_Game *game)
+void	clear_image(t_game *game)
 {
 	mlx_destroy_image(game->d.mlx, game->t->c_d);
 	mlx_destroy_image(game->d.mlx, game->t->o_d);

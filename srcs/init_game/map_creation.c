@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-int	create_map(t_Game *game, int *cpt_food)
+int	create_map(t_game *game, int *cpt_food)
 {
 	int	i;
 	int	j;
@@ -33,14 +33,14 @@ int	create_map(t_Game *game, int *cpt_food)
 			else if (game->map[i][j] == 'C')
 				*cpt_food += 1;
 			else if (!ft_strchr("01CPE", game->map[i][j]))
-				return (ft_putstr_fd("Error:\nInvalid map\n", 2), 1);
+				return (error_message("Invalid map"), 1);
 			j++;
 		}
 	}
 	return (0);
 }
 
-int	calc_h(t_Game *game)
+int	calc_h(t_game *game)
 {
 	int	i;
 
@@ -52,7 +52,7 @@ int	calc_h(t_Game *game)
 	return (64 * i);
 }
 
-int	calc_w(t_Game *game)
+int	calc_w(t_game *game)
 {
 	int	i;
 
@@ -61,15 +61,14 @@ int	calc_w(t_Game *game)
 	return (i * 64);
 }
 
-t_Game	*init_struct(int fd)
+t_game	*init_struct(int fd)
 {
-	t_Game	*game;
+	t_game	*game;
 
 	game = create_game(fd);
-	close(fd);
 	if (!game)
 	{
-		ft_putstr_fd("Error:\nMap creation has failed\n", 2);
+		error_message("Map creation has failed");
 		exit (0);
 	}
 	game->d.mlx = NULL;
@@ -80,7 +79,7 @@ t_Game	*init_struct(int fd)
 	game->d.win.h = calc_h(game);
 	if (game->d.win.h > 1080 || game->d.win.w > 1920)
 	{
-		ft_putstr_fd("Error\nMap Bigger than screen", 2);
+		error_message("Map Bigger than screen");
 		free_game(game);
 	}
 	game->moov = 0;

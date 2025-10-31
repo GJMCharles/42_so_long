@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-void	ft_move_w(t_Game *game)
+void	ft_move_w(t_game *game)
 {
 	int		x;
 	int		y;
@@ -40,7 +40,7 @@ void	ft_move_w(t_Game *game)
 	}
 }
 
-void	ft_move_s(t_Game *game)
+void	ft_move_s(t_game *game)
 {
 	int		x;
 	int		y;
@@ -68,7 +68,7 @@ void	ft_move_s(t_Game *game)
 	}
 }
 
-void	ft_move_a(t_Game *game)
+void	ft_move_a(t_game *game)
 {
 	int		x;
 	int		y;
@@ -96,7 +96,7 @@ void	ft_move_a(t_Game *game)
 	}
 }
 
-void	ft_move_d(t_Game *game)
+void	ft_move_d(t_game *game)
 {
 	int		x;
 	int		y;

@@ -13,31 +13,34 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include "../libft/incs/ft_printf.h"
-# include "../mlx/mlx.h"
+# include <fcntl.h>
 
-typedef struct t_Player
+# include "libft.h"
+# include "ft_printf.h"
+# include "mlx.h"
+
+typedef struct t_player
 {
 	int		x;
 	int		y;
 	int		w;
-}				t_Player;
+}				t_player;
 
-typedef struct t_Exit
+typedef struct t_exit
 {
 	int		x;
 	int		y;
 	int		is_open;
-}				t_Exit;
+}				t_exit;
 
-typedef struct t_Food
+typedef struct t_food
 {
 	int		x;
 	int		y;
 	int		eaten;
-}				t_Food;
+}				t_food;
 
-typedef struct t_Texture
+typedef struct t_texture
 {
 	void	*c_d;
 	void	*o_d;
@@ -47,31 +50,31 @@ typedef struct t_Texture
 	void	*col;
 	int		h;
 	int		w;
-}				t_Texture;
+}				t_texture;
 
-typedef struct t_Windows
+typedef struct t_windows
 {
 	int	h;
 	int	w;
-}				t_Windows;
+}				t_windows;
 
-typedef struct t_Mlx_data
+typedef struct t_mlx_data
 {
 	void		*mlx;
 	void		*mlx_win;
-	t_Windows	win;
-}				t_Mlx_data;
+	t_windows	win;
+}				t_mlx_data;
 
-typedef struct t_Game
+typedef struct t_game
 {
 	char		**map;
-	t_Player	*player;
-	t_Exit		*exit;
-	t_Food		**food_list;
-	t_Mlx_data	d;
-	t_Texture	*t;
+	t_player	*player;
+	t_exit		*exit;
+	t_food		**food_list;
+	t_mlx_data	d;
+	t_texture	*t;
 	int			moov;
-}				t_Game;
+}				t_game;
 
 typedef struct t_nk
 {
@@ -79,35 +82,37 @@ typedef struct t_nk
 	int	j;
 }				t_nk;
 
-t_Game		*create_game(int fd);
-t_Game		*init_struct(int fd);
+void		error_message(char *message);
 
-t_Exit		*create_exit(int x, int y);
+t_game		*create_game(int fd);
+t_game		*init_struct(int fd);
 
-t_Food		*create_food(int x, int y);
+t_exit		*create_exit(int x, int y);
 
-t_Player	*create_player(int x, int y);
+t_food		*create_food(int x, int y);
 
-int			nbr_collectible(t_Game *game);
-int			is_playable(t_Game *game);
-int			ft_check_map(t_Game *game);
-int			create_map(t_Game *game, int *cpt_food);
+t_player	*create_player(int x, int y);
+
+int			nbr_collectible(t_game *game);
+int			is_playable(t_game *game);
+int			ft_check_map(t_game *game);
+int			create_map(t_game *game, int *cpt_food);
 int			is_exit_reachable(int x, int y, char **map);
 void		is_collectible_reachable(int x, int y, char **map, int *cpt);
 int			valid_map_requirement(char **map);
 int			verif_ext(char *str);
 
-void		free_game(t_Game *game);
-void		free_game_2(t_Game *game);
-void		is_door_open(t_Game *game);
-void		ft_move_d(t_Game *game);
-void		ft_move_w(t_Game *game);
-void		ft_move_s(t_Game *game);
-void		ft_move_a(t_Game *game);
-void		init_texture(t_Game *game);
-void		render_map(t_Game *game);
-void		clear_image(t_Game *game);
-void		eat_collectible(int x, int y, t_Game *game);
+void		free_game(t_game *game);
+void		free_game_2(t_game *game);
+void		is_door_open(t_game *game);
+void		ft_move_d(t_game *game);
+void		ft_move_w(t_game *game);
+void		ft_move_s(t_game *game);
+void		ft_move_a(t_game *game);
+void		init_texture(t_game *game);
+void		render_map(t_game *game);
+void		clear_image(t_game *game);
+void		eat_collectible(int x, int y, t_game *game);
 void		ft_parser(int fd, char ***map);
 void		free_map(char **map);
 void		ft_print_map(char **map);

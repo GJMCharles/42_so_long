@@ -35,7 +35,7 @@ char	**ft_map_copy(char **map)
 	return (result);
 }
 
-int	is_playable(t_Game *game)
+int	is_playable(t_game *game)
 {
 	char	**mapcopy;
 	int		error;
@@ -47,7 +47,7 @@ int	is_playable(t_Game *game)
 	if (!is_exit_reachable(game->player->x, game->player->y, mapcopy))
 	{
 		error = 1;
-		ft_putstr_fd("Error\nThe exit is not reachable", 2);
+		error_message("The exit is not reachable");
 	}
 	free_map(mapcopy);
 	mapcopy = ft_map_copy(game->map);
@@ -56,7 +56,7 @@ int	is_playable(t_Game *game)
 	if (col_c != nbr_collectible(game))
 	{
 		error = 1;
-		ft_putstr_fd("Error\nOne of the collectible is not reachable", 2);
+		error_message("One of the collectible is not reachable");
 	}
 	return (error);
 }

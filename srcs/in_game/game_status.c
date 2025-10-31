@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-void	is_door_open(t_Game *game)
+void	is_door_open(t_game *game)
 {
 	int	count_eaten;
 	int	i;
@@ -31,7 +31,7 @@ void	is_door_open(t_Game *game)
 		game->exit->is_open = 1;
 }
 
-void	eat_collectible(int x, int y, t_Game *game)
+void	eat_collectible(int x, int y, t_game *game)
 {
 	int	i;
 

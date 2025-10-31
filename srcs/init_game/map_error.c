@@ -88,12 +88,12 @@ static int	is_rect_map(char **map)
 	return (error);
 }
 
-int	ft_check_map(t_Game *game)
+int	ft_check_map(t_game *game)
 {
 	if (is_closed_map(game->map))
-		return (ft_putstr_fd("Error\nThe map is not closed", 2), 1);
+		return (error_message("The map is not closed"), 1);
 	else if (is_rect_map(game->map))
-		return (ft_putstr_fd("Error\nThe map is not rectangular", 2), 1);
+		return (error_message("The map is not rectangular"), 1);
 	else if (is_playable(game))
 		return (1);
 	return (0);

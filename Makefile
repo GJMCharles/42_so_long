@@ -10,90 +10,96 @@
 #                                                                              #
 # **************************************************************************** #
 
-MAKEFLAGS 	:=	--no-print-directory
+.DEFAULT_GOAL := all
 
-NAME		=	so_long
-CC		=	cc
-CFLAGS		=	-Wall -Wextra -Werror
+NAME := so_long
 
-INCLUDE		=	incs/
-INCLUDE_BONUS	=	incs_bonus/
-SRCS_BONUS_DIR	=	srcs_bonus/
-SRCS_DIR	=	srcs/
-LIBFT		=	libft/
-MLX_DIR		=	mlx/
-OBJ_DIR		=	obj/
+RM := rm -frv
+CC := cc
+CFLAGS := -Wall -Wextra -Werror
+MAKEFLAGS := --no-print-directory
 
-RM		=	rm -frv
+LIB_DIR := ./libraries
+SRCS_DIR := ./srcs/
 
-SRC_FILE =	init_game/create_game.c \
-		init_game/is_playable.c \
-		init_game/map_error.c \
-		init_game/parsing.c \
-		init_game/map_creation.c \
-		init_game/texture_status.c \
-		init_game/verif_ext.c \
-		init_game/free_func.c \
-		in_game/struct_func.c \
-		in_game/movements.c \
-		in_game/game_status.c \
-		render/render_map.c \
-		main.c
+LIBFT_SRC := $(LIB_DIR)/libft
+FTPRINTF_SRC := $(LIB_DIR)/ftprintf
+MINILIBX_SRC := $(LIB_DIR)/minilibx
 
-SRCS = $(addprefix $(SRCS_DIR), $(SRC_FILE))
-OBJ  = $(addprefix $(OBJ_DIR), $(SRC_FILE:.c=.o))
+LDFLAGS := \
+	-I ./ \
+	-I $(LIBFT_SRC) \
+	-I $(FTPRINTF_SRC) \
+	-I $(MINILIBX_SRC)
 
-OBJF = .cache_exists
+LDLIBS := \
+	-L $(LIBFT_SRC) -lft \
+	-L $(FTPRINTF_SRC) -lftprintf \
+	-L $(MINILIBX_SRC) -lmlx_Linux \
+	-lXext -lX11 -lm -lz
 
-all: $(NAME)
+SRCS_FILE := \
+	main.c \
+	init_game/create_game.c \
+	init_game/is_playable.c \
+	init_game/map_error.c \
+	init_game/parsing.c \
+	init_game/map_creation.c \
+	init_game/texture_status.c \
+	init_game/verif_ext.c \
+	init_game/free_func.c \
+	in_game/struct_func.c \
+	in_game/movements.c \
+	in_game/game_status.c \
+	render/render_map.c
 
-$(NAME): $(OBJ)
-	@make -C $(MLX_DIR)
-	@make -C $(LIBFT)
-	@$(CC) -o $(NAME) $(CFLAGS) -I$(INCLUDE) $(OBJ) -L$(LIBFT) -lcustomft -L$(MLX_DIR) -lmlx -lX11 -lXext
+SOURCES := $(addprefix $(SRCS_DIR), $(SRCS_FILE))
+OBJECTS := $(patsubst %.c,%.o,$(SOURCES))
 
-$(OBJ_DIR)%.o: $(SRCS_DIR)%.c | $(OBJF)
-	@$(CC) $(CFLAGS) -I$(INCLUDE) -c $< -o $@
+all: LIBS $(NAME)
 
-$(OBJF):
-	@mkdir -p $(OBJ_DIR)
-	@mkdir -p $(OBJ_DIR)/init_game
-	@mkdir -p $(OBJ_DIR)/in_game
-	@mkdir -p $(OBJ_DIR)/render
+%.o: %.c
+	$(CC) $(CFLAGS) $(LDFLAGS) -c $< -o $@
+
+LIBS:
+	@make $(MAKEFLAGS) -C $(FTPRINTF_SRC) all
+	@make $(MAKEFLAGS) -C $(MINILIBX_SRC) all
+
+$(NAME): $(OBJECTS)
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^ $(LDLIBS)
+
+norm:
+	norminette -R CheckForniddenHeader libraries/libft libraries/ftprintf srcs
 
 runtest: all
-	-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) map/empty_map_2.ber
-	-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) map/empty_map.ber
-	-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) map/false_map.ber
-	-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) map/map_too_big_1.ber
-	-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) map/map_too_big.ber
-	-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) map/map.txt
-	-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) map/no_collectible.ber
-	-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) map/no_player.ber
-	-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) map/no_exit.ber
-	-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) map/not_rect_map.ber
-	-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) map/open_map_2.ber
-	-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) map/open_map.ber
-	-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) map/two_exit.ber
-	-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) map/two_player.ber
-	-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) map/unreachable_ex.ber
-	-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) map/unreachable_col.ber
-	-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) map/small_map.ber
-	-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) map/map.ber
-
-norminette:
-	norminette -R CheckForniddenHeader incs libft srcs
+	-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) maps/empty_map_2.ber
+	-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) maps/empty_map.ber
+	-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) maps/false_map.ber
+	-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) maps/map_too_big_1.ber
+	-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) maps/map_too_big.ber
+	-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) maps/map.txt
+	-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) maps/no_collectible.ber
+	-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) maps/no_player.ber
+	-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) maps/no_exit.ber
+	-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) maps/not_rect_map.ber
+	-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) maps/open_map_2.ber
+	-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) maps/open_map.ber
+	-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) maps/two_exit.ber
+	-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) maps/two_player.ber
+	-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) maps/unreachable_ex.ber
+	-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) maps/unreachable_col.ber
+	-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) maps/small_map.ber
+	-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes -s ./$(NAME) maps/map.ber
 
 clean:
-	@$(RM) $(OBJ_DIR)
+	@make $(MAKEFLAGS) -C $(FTPRINTF_SRC) clean
+	@make $(MAKEFLAGS) -C $(MINILIBX_SRC) clean
+	@$(RM) $(OBJECTS)
 
-fclean: clean
+fclean: clean	
+	@make $(MAKEFLAGS) -C $(FTPRINTF_SRC) fclean
 	@$(RM) $(NAME)
-	@make fclean -sC $(LIBFT)
-	@make clean -sC $(MLX_DIR)
 
 re: fclean all
 
-.PHONY: all clean fclean re runtest norminette
-
-
+.PHONY: all clean fclean re norm runtest
