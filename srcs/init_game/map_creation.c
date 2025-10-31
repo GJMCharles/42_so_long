@@ -6,11 +6,11 @@
 /*   By: grcharle <grcharle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 10:10:06 by grcharle          #+#    #+#             */
-/*   Updated: 2025/10/31 10:10:08 by grcharle         ###   ########.fr       */
+/*   Updated: 2025/10/31 10:27:24 by grcharle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/so_long.h"
+#include "so_long.h"
 
 int	create_map(t_Game *game, int *cpt_food)
 {

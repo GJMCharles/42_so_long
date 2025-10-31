@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/so_long.h"
+#include "so_long.h"
 
 t_Player	*create_player(int x, int y)
 {

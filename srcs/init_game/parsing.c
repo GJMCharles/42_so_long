@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/so_long.h"
+#include "so_long.h"
 
 int	is_cutted(char *tmpmap)
 {

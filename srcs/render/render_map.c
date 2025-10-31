@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/so_long.h"
+#include "so_long.h"
 
 static void	bis(void *mlx, void *win, void *img, t_nk nk)
 {
