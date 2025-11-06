@@ -6,7 +6,7 @@
 #    By: grcharle <grcharle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 09:32:25 by grcharle          #+#    #+#              #
-#    Updated: 2025/10/31 09:38:32 by grcharle         ###   ########.fr        #
+#    Updated: 2025/11/06 19:46:22 by grcharle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -99,6 +99,7 @@ clean:
 fclean: clean	
 	@make $(MAKEFLAGS) -C $(FTPRINTF_SRC) fclean
 	@$(RM) $(NAME)
+
 
 re: fclean all
 
